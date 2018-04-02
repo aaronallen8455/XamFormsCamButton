@@ -101,8 +101,8 @@ namespace CameraButtonTest
                     // invoke the start taking video command if button is being held down
                     if (!WasNotHeldDown && (StartTakingVideoCommand == null || StartTakingVideoCommand.CanExecute(null)))
                     {
-                        var animation = new Animation(v => Completion = (float)v, 0, 1);
-                        animation.Commit(this, "DrawArc", 16, MAX_VID_DURATION * 1000, finished: (_,c) => StopRecordingVideo());
+                        var animation = new Animation(v => Completion = (float)v, 0, 1, Easing.Linear);
+                        animation.Commit(this, "DrawArc", 50, MAX_VID_DURATION * 1000, finished: (_,c) => StopRecordingVideo());
                         IsHeldDown = true;
 
                         StartTakingVideoCommand?.Execute(null);
@@ -134,7 +134,6 @@ namespace CameraButtonTest
             if (this.AnimationIsRunning("DrawArc"))
             {
                 this.AbortAnimation("DrawArc");
-                Completion = 0;
             }
         }
 
@@ -147,6 +146,8 @@ namespace CameraButtonTest
             {
                 StopTakingVideoCommand?.Execute(null);
             }
+
+            Completion = 0;
         }
     }
 }
