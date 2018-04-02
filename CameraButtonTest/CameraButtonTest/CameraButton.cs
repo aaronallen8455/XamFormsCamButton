@@ -102,7 +102,7 @@ namespace CameraButtonTest
                     if (!WasNotHeldDown && (StartTakingVideoCommand == null || StartTakingVideoCommand.CanExecute(null)))
                     {
                         var animation = new Animation(v => Completion = (float)v, 0, 1, Easing.Linear);
-                        animation.Commit(this, "DrawArc", 50, MAX_VID_DURATION * 1000, finished: (_,c) => StopRecordingVideo());
+                        animation.Commit(this, "DrawArc", 42, MAX_VID_DURATION * 1000, finished: (_,c) => StopRecordingVideo());
                         IsHeldDown = true;
 
                         StartTakingVideoCommand?.Execute(null);

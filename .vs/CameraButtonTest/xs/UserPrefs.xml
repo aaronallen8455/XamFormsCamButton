@@ -1,10 +1,10 @@
 ﻿<Properties StartupConfiguration="{E982D51D-EDA8-4BF8-9139-BF4E321C77D8}|Default">
-  <MonoDevelop.Ide.Workbench>
+  <MonoDevelop.Ide.Workbench ActiveDocument="CameraButtonTest/CameraButtonTest.iOS/CameraButtonView.cs">
     <Files>
-      <File FileName="CameraButtonTest/CameraButtonTest.iOS/CameraButtonRenderer.cs" Line="37" Column="14" />
-      <File FileName="CameraButtonTest/CameraButtonTest.iOS/CameraButtonView.cs" Line="60" Column="21" />
-      <File FileName="CameraButtonTest/CameraButtonTest/MainPage.xaml" Line="10" Column="19" />
-      <File FileName="CameraButtonTest/CameraButtonTest/CameraButton.cs" Line="1" Column="1" />
+      <File FileName="CameraButtonTest/CameraButtonTest.iOS/CameraButtonRenderer.cs" Line="42" Column="9" />
+      <File FileName="CameraButtonTest/CameraButtonTest.iOS/CameraButtonView.cs" Line="36" Column="4" />
+      <File FileName="CameraButtonTest/CameraButtonTest/MainPage.xaml" Line="13" Column="1" />
+      <File FileName="CameraButtonTest/CameraButtonTest/CameraButton.cs" Line="82" Column="10" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug|iPhoneSimulator" />

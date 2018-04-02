@@ -5,8 +5,8 @@
              x:Class="CameraButtonTest.MainPage">
 
     <StackLayout>
-        <local:CameraButton x:Name="Button" WidthRequest="100" HeightRequest="100"/>
         <Button Text="b" WidthRequest="60" HorizontalOptions="Start"/>
+        <local:CameraButton x:Name="Button" WidthRequest="100" HeightRequest="100"/>
     </StackLayout>
 
 </ContentPage>
