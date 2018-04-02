@@ -15,11 +15,13 @@ namespace CameraButtonTest.Droid
 {
     public class CameraButtonView : View
     {
+        const float BorderThickness = 16;
+
         protected CameraButton FormsButton;
 
         Paint ArcPaint;
 
-        Paint CirclePaint;
+        //Paint CirclePaint;
 
         Paint BorderPaint;
 
@@ -27,13 +29,13 @@ namespace CameraButtonTest.Droid
         {
             FormsButton = cameraButton;
 
-            ArcPaint = new Paint(PaintFlags.AntiAlias) { Color = Color.Red, StrokeWidth = 10 };
+            ArcPaint = new Paint(PaintFlags.AntiAlias) { Color = Color.Red, StrokeWidth = BorderThickness };
             ArcPaint.SetStyle(Paint.Style.Stroke);
 
-            CirclePaint = new Paint(PaintFlags.AntiAlias) { Color = Color.LightGray };
-            CirclePaint.SetStyle(Paint.Style.Fill);
+            //CirclePaint = new Paint(PaintFlags.AntiAlias) { Color = Color.LightGray };
+            //CirclePaint.SetStyle(Paint.Style.Fill);
 
-            BorderPaint = new Paint(PaintFlags.AntiAlias) { Color = Color.DarkGray, StrokeWidth = 10 };
+            BorderPaint = new Paint(PaintFlags.AntiAlias) { Color = Color.White, StrokeWidth = BorderThickness };
             BorderPaint.SetStyle(Paint.Style.Stroke);
         }
 
@@ -42,14 +44,16 @@ namespace CameraButtonTest.Droid
             base.OnDraw(canvas);
 
             // Draw background
-            canvas.DrawCircle(300, 300, 300, CirclePaint);
-            canvas.DrawCircle(300, 300, 300, BorderPaint);
+            var radius = (float)FormsButton.WidthRequest * Resources.DisplayMetrics.Density / 2;
+            var offset = BorderThickness / 2;
+            //canvas.DrawCircle(radius, radius, radius - 5, CirclePaint);
+            canvas.DrawCircle(radius, radius, radius - offset, BorderPaint);
 
             float angle = FormsButton.Completion * 360;
 
             // Draw completion arc
             Path path = new Path();
-            RectF rectf = new RectF(0, 0, 600, 600);
+            RectF rectf = new RectF(offset, offset, radius * 2 - offset, radius * 2 - offset);
             path.ArcTo(rectf, 270, angle);
             canvas.DrawPath(path, ArcPaint);
         }

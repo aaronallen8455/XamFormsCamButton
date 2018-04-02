@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
 using System.Windows.Input;
 using Xamarin.Forms;
 
@@ -80,7 +78,7 @@ namespace CameraButtonTest
 
         public CameraButton() : base()
         {
-            
+
         }
 
         protected bool IsHeldDown;
@@ -96,25 +94,15 @@ namespace CameraButtonTest
                 WasNotHeldDown = false;
                 IsHeldDown = false;
 
-                Device.StartTimer(TimeSpan.FromMilliseconds(150), () => {
+                // set a timer to determine whether button is being held down or tapped.
+                Device.StartTimer(TimeSpan.FromMilliseconds(150), () =>
+                {
 
                     // invoke the start taking video command if button is being held down
                     if (!WasNotHeldDown && (StartTakingVideoCommand == null || StartTakingVideoCommand.CanExecute(null)))
                     {
                         var animation = new Animation(v => Completion = (float)v, 0, 1);
-                        animation.Commit(this, "DrawArc", 16, MAX_VID_DURATION * 1000, finished: (_, canceled) =>
-                        {
-                            // animation finished
-                            if (!canceled)
-                            {
-                                // max video length was reached, end recording
-                                if (StopTakingVideoCommand != null && StopTakingVideoCommand.CanExecute(null))
-                                {
-                                    StopTakingVideoCommand?.Execute(null);
-                                }
-                                Completion = 0;
-                            }
-                        });
+                        animation.Commit(this, "DrawArc", 16, MAX_VID_DURATION * 1000, finished: (_,c) => StopRecordingVideo());
                         IsHeldDown = true;
 
                         StartTakingVideoCommand?.Execute(null);
@@ -130,15 +118,7 @@ namespace CameraButtonTest
         /// </summary>
         public void OnReleased()
         {
-            if (IsHeldDown)
-            {
-                // invoke the stop taking video command
-                if (this.AnimationIsRunning("DrawArc") && StopTakingVideoCommand != null && StopTakingVideoCommand.CanExecute(null))
-                {
-                    StopTakingVideoCommand?.Execute(null);
-                }
-            }
-            else
+            if (!IsHeldDown)
             {
                 WasNotHeldDown = true;
                 // invoke the take picture command
@@ -155,6 +135,17 @@ namespace CameraButtonTest
             {
                 this.AbortAnimation("DrawArc");
                 Completion = 0;
+            }
+        }
+
+        /// <summary>
+        /// Called when DrawArc animation is aborted or when it completes, signifies that recording is complete
+        /// </summary>
+        protected void StopRecordingVideo()
+        {
+            if (StopTakingVideoCommand != null && StopTakingVideoCommand.CanExecute(null))
+            {
+                StopTakingVideoCommand?.Execute(null);
             }
         }
     }

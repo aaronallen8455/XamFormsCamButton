@@ -4,6 +4,9 @@
              xmlns:local="clr-namespace:CameraButtonTest"
              x:Class="CameraButtonTest.MainPage">
 
-    <local:CameraButton x:Name="Button"/>
+    <StackLayout>
+        <local:CameraButton x:Name="Button" WidthRequest="100" HeightRequest="100"/>
+        <Button Text="b" WidthRequest="60" HorizontalOptions="Start"/>
+    </StackLayout>
 
 </ContentPage>
